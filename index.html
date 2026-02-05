@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Be My Valentine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Pacifico&family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="tag">To: <span id="herName">My Favorite Person</span></div>
+        <h1>Will you be my Valentine?</h1>
+        <p class="subtitle">
+          I made this just for you. If you say yes, I have a date planned.
+        </p>
+        <div class="buttons">
+          <button id="yesBtn" class="btn primary">Yes, I'd love to</button>
+          <button id="detailsBtn" class="btn ghost">Tell me more</button>
+        </div>
+        <div id="secret" class="secret hidden">
+          <h2>It's a date.</h2>
+          <p class="secret-text">
+            Pick a day and I will bring the flowers, the playlist, and the snacks.
+          </p>
+          <ul class="plan">
+            <li>Sunset walk</li>
+            <li>Your favorite food</li>
+            <li>A surprise stop</li>
+          </ul>
+          <p class="signature">Love, <span id="yourName">[Your Name]</span></p>
+        </div>
+      </header>
+
+      <section class="section gifs">
+        <h3>Some extra cute</h3>
+        <div class="gif-row">
+          <img
+            src="https://www.funimada.com/assets/images/cards/big/valentine-35.gif"
+            alt="Valentine animation"
+          />
+          <img
+            src="https://www.funimada.com/assets/images/cards/big/valentine-2.gif"
+            alt="Love animation"
+          />
+        </div>
+      </section>
+
+      <section class="section photos">
+        <h3>Favorite moments</h3>
+        <div class="photo-grid">
+          <figure class="polaroid">
+            <img
+              src="assets/photo-1.jpg"
+              alt="Photo 1"
+              onerror="this.onerror=null; this.src='assets/placeholder.svg'; this.classList.add('placeholder');"
+            />
+            <figcaption>Us in the sunshine</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <img
+              src="assets/photo-2.jpg"
+              alt="Photo 2"
+              onerror="this.onerror=null; this.src='assets/placeholder.svg'; this.classList.add('placeholder');"
+            />
+            <figcaption>Your smile</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <img
+              src="assets/photo-3.jpg"
+              alt="Photo 3"
+              onerror="this.onerror=null; this.src='assets/placeholder.svg'; this.classList.add('placeholder');"
+            />
+            <figcaption>Our favorite memory</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <div class="floating" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

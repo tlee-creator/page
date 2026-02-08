@@ -12,9 +12,12 @@ const noBtn = document.getElementById("noBtn");
 const yesGagEl = document.getElementById("yesGag");
 const noGagEl = document.getElementById("noGag");
 const buttonsEl = document.querySelector(".buttons");
+const yesWrap = yesBtn.closest(".yes-wrap");
 let noClicks = 0;
 let noGagTimer = null;
 let yesGagTimer = null;
+let longPressTimer = null;
+let suppressYesClick = false;
 
 herNameEl.textContent = settings.herName;
 yourNameEl.textContent = settings.yourName;
@@ -55,7 +58,64 @@ const showPopup = (el, timerRef, durationMs = 1600) => {
   }, durationMs);
 };
 
+const clearLongPress = () => {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+};
+
+const showLongPress = () => {
+  if (!yesWrap) return;
+  suppressYesClick = true;
+  yesWrap.classList.add("long-press");
+};
+
+const hideLongPress = () => {
+  if (!yesWrap) return;
+  yesWrap.classList.remove("long-press");
+};
+
+yesBtn.addEventListener(
+  "touchstart",
+  () => {
+    clearLongPress();
+    longPressTimer = setTimeout(showLongPress, 450);
+  },
+  { passive: true }
+);
+
+yesBtn.addEventListener(
+  "touchend",
+  () => {
+    hideLongPress();
+    clearLongPress();
+  },
+  { passive: true }
+);
+
+yesBtn.addEventListener(
+  "touchcancel",
+  () => {
+    hideLongPress();
+    clearLongPress();
+  },
+  { passive: true }
+);
+
+yesBtn.addEventListener(
+  "touchmove",
+  () => {
+    clearLongPress();
+  },
+  { passive: true }
+);
+
 yesBtn.addEventListener("click", () => {
+  if (suppressYesClick) {
+    suppressYesClick = false;
+    return;
+  }
   reveal();
   burstHearts();
   noGagEl.classList.add("hidden");
@@ -64,6 +124,7 @@ yesBtn.addEventListener("click", () => {
     clearTimeout(noGagTimer);
     noGagTimer = null;
   }
+  hideLongPress();
   yesGagTimer = showPopup(yesGagEl, yesGagTimer);
   noClicks = 0;
   yesBtn.disabled = true;

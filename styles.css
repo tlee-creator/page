@@ -168,6 +168,11 @@ h1 {
   }
 }
 
+.yes-wrap.long-press .photo-pop {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
 .secret {
   margin: 24px auto 0;
   padding: 20px 24px;
@@ -334,6 +339,10 @@ h1 {
     .yes-wrap:hover .photo-pop {
       transform: translateX(-50%) scale(1);
     }
+  }
+
+  .yes-wrap.long-press .photo-pop {
+    transform: translateX(-50%) scale(1);
   }
 
 }

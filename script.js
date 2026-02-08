@@ -1,20 +1,23 @@
 const settings = {
-  herName: "My Favorite Person",
-  yourName: "[Your Name]",
-  revealMessage:
-    "Pick a day and I will bring the flowers, the playlist, and the snacks.",
+  herName: "Little baby Pooch",
+  yourName: "Not Stinky",
 };
+
 
 const herNameEl = document.getElementById("herName");
 const yourNameEl = document.getElementById("yourName");
 const secretEl = document.getElementById("secret");
-const secretTextEl = document.querySelector(".secret-text");
 const yesBtn = document.getElementById("yesBtn");
-const detailsBtn = document.getElementById("detailsBtn");
+const noBtn = document.getElementById("noBtn");
+const yesGagEl = document.getElementById("yesGag");
+const noGagEl = document.getElementById("noGag");
+const buttonsEl = document.querySelector(".buttons");
+let noClicks = 0;
+let noGagTimer = null;
+let yesGagTimer = null;
 
 herNameEl.textContent = settings.herName;
 yourNameEl.textContent = settings.yourName;
-secretTextEl.textContent = settings.revealMessage;
 
 const reveal = () => {
   if (!secretEl.classList.contains("hidden")) return;
@@ -36,9 +39,41 @@ const burstHearts = () => {
   }
 };
 
+const swapButtons = () => {
+  buttonsEl.classList.toggle("swapped");
+};
+
+const showPopup = (el, timerRef, durationMs = 1600) => {
+  if (timerRef) {
+    clearTimeout(timerRef);
+  }
+  el.classList.remove("hidden");
+  el.classList.add("show");
+  return setTimeout(() => {
+    el.classList.remove("show");
+    el.classList.add("hidden");
+  }, durationMs);
+};
+
 yesBtn.addEventListener("click", () => {
   reveal();
   burstHearts();
+  noGagEl.classList.add("hidden");
+  noGagEl.classList.remove("show");
+  if (noGagTimer) {
+    clearTimeout(noGagTimer);
+    noGagTimer = null;
+  }
+  yesGagTimer = showPopup(yesGagEl, yesGagTimer);
+  noClicks = 0;
+  yesBtn.disabled = true;
+  noBtn.disabled = true;
 });
 
-detailsBtn.addEventListener("click", reveal);
+noBtn.addEventListener("click", () => {
+  noClicks += 1;
+  if (noClicks <= 2) {
+    noGagTimer = showPopup(noGagEl, noGagTimer);
+  }
+  swapButtons();
+});

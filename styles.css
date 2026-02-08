@@ -161,7 +161,8 @@ h1 {
   display: block;
 }
 
-.yes-wrap:hover .photo-pop {
+.yes-wrap:hover .photo-pop,
+.yes-wrap:focus-within .photo-pop {
   opacity: 1;
   transform: translateY(-50%) scale(1);
 }
@@ -318,6 +319,19 @@ h1 {
 
   .hero {
     padding: 36px 20px;
+  }
+
+  .photo-pop {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%) scale(0.98);
+  }
+
+  .yes-wrap:hover .photo-pop,
+  .yes-wrap:focus-within .photo-pop {
+    transform: translateX(-50%) scale(1);
   }
 
 }
